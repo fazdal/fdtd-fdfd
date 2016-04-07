@@ -1,0 +1,8 @@
+do for [i=100:195:5] {
+  set term png
+  set output 'plot'.i.'.png'
+  set xrange[0:200]
+  set yrange[-1:1]
+  unset key                               
+  plot 'plot'.i with lines
+}
