@@ -1,8 +1,26 @@
-do for [i=100:195:5] {
-  set term png
-  set output 'plot'.i.'.png'
-  set xrange[0:200]
-  set yrange[-1:1]
-  unset key                               
-  plot 'plot'.i with lines
+set term png
+set xrange[0:200]
+set yrange[-1:1]
+unset key       
+
+do for [i=0:499:1] {
+  set output 'plot%05.0f.png'
+  plot 'plot'%05.0f with lines
 }
+
+
+
+#  set output 'plot'.i.'.png'
+
+
+
+set terminal gif animate delay 5 loop 0
+set output 'eplot.gif'
+set xrange[0:nx]
+set yrange[-1:1]
+
+do for [i=1:nt] {
+    plot 'eplot' every () using 2:3 title "E-field" with lines
+#    plot 'hplot' every () using 2:3 title "H-field"
+}
+set output
