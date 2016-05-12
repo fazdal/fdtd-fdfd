@@ -1,0 +1,657 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass{article}
+
+    
+    
+    \usepackage{graphicx} % Used to insert images
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{color} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage{ulem} % ulem is needed to support strikethroughs (\sout)
+    
+
+    
+    
+    \definecolor{orange}{cmyk}{0,0.4,0.8,0.2}
+    \definecolor{darkorange}{rgb}{.71,0.21,0.01}
+    \definecolor{darkgreen}{rgb}{.12,.54,.11}
+    \definecolor{myteal}{rgb}{.26, .44, .56}
+    \definecolor{gray}{gray}{0.45}
+    \definecolor{lightgray}{gray}{.95}
+    \definecolor{mediumgray}{gray}{.8}
+    \definecolor{inputbackground}{rgb}{.95, .95, .85}
+    \definecolor{outputbackground}{rgb}{.95, .95, .95}
+    \definecolor{traceback}{rgb}{1, .95, .95}
+    % ansi colors
+    \definecolor{red}{rgb}{.6,0,0}
+    \definecolor{green}{rgb}{0,.65,0}
+    \definecolor{brown}{rgb}{0.6,0.6,0}
+    \definecolor{blue}{rgb}{0,.145,.698}
+    \definecolor{purple}{rgb}{.698,.145,.698}
+    \definecolor{cyan}{rgb}{0,.698,.698}
+    \definecolor{lightgray}{gray}{0.5}
+    
+    % bright ansi colors
+    \definecolor{darkgray}{gray}{0.25}
+    \definecolor{lightred}{rgb}{1.0,0.39,0.28}
+    \definecolor{lightgreen}{rgb}{0.48,0.99,0.0}
+    \definecolor{lightblue}{rgb}{0.53,0.81,0.92}
+    \definecolor{lightpurple}{rgb}{0.87,0.63,0.87}
+    \definecolor{lightcyan}{rgb}{0.5,1.0,0.83}
+    
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{task1}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=blue,
+      linkcolor=darkorange,
+      citecolor=darkgreen,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Task 1: Absorbing Boundary
+Conditions}\label{task-1-absorbing-boundary-conditions}
+
+\subsection{Background}\label{background}
+
+Some calculations would require the background material to be extended
+infinitely in at least one direction. However, given the limitations on
+computer storage, we need to be able to create boundaries such that the
+domain appears to be infinite.
+
+Here, we consider the local boundary conditions designed by Engquist and
+Majda in 1977. These were developed such that the amplitude of the
+reflection coefficients were small, and that the BCs, along with the
+associated differential equation, guarantee a well-posed initial
+boundary value problem.
+
+    \subsection{Derivation}\label{derivation}
+
+For the 1-dimensional wave equation given by
+
+\begin{equation}
+\dfrac{\partial^2 U}{\partial x^2} = \dfrac{1}{c^2} \dfrac{\partial^2 U}{\partial t^2} 
+\end{equation}
+
+we can define an operator \(G\) where
+
+\begin{equation}
+G = \dfrac{\partial^2}{\partial x^2} - \dfrac{1}{c^2} \dfrac{\partial^2}{\partial t^2} 
+\end{equation}
+
+so that the wave equation can be written easily as
+
+\begin{equation}
+GU = 0
+\end{equation}
+
+We can separate \(G\) such that
+
+\begin{equation}
+G = G^+ G^-
+\end{equation}
+
+\begin{equation}
+G^+ = \dfrac{\partial}{\partial x} + \dfrac{1}{c} \dfrac{\partial}{\partial t}
+\end{equation}
+
+\begin{equation}
+G^- = \dfrac{\partial}{\partial x} - \dfrac{1}{c} \dfrac{\partial}{\partial t}
+\end{equation}
+
+At the left side of the boundary, where \(x=0\), the application of the
+operator \(G^-\) to any wavefunction \(U\) exactly absorbs a plane wave
+propagating toward the left boundary at any incident angle. Simularly,
+the operator \(G^+\) acting on \(U\) absorbs a plane wave propagating
+toward the right boundary. Hence we have
+
+\begin{equation}
+G^-U = 0 \qquad \longrightarrow \qquad \dfrac{\partial U}{\partial x} - \dfrac{1}{c} \dfrac{\partial U}{\partial t} = 0
+\end{equation}
+
+and at the right side, at \(x=d\),
+
+\begin{equation}
+G^+U = 0 \qquad \longrightarrow \qquad \dfrac{\partial U}{\partial x} + \dfrac{1}{c} \dfrac{\partial U}{\partial t} = 0
+\end{equation}
+
+We take the time derivative of both of the equations above
+
+\begin{equation}
+\dfrac{\partial^2 U}{\partial x \partial t} - \dfrac{1}{c} \dfrac{\partial^2 U}{\partial t^2} = 0 \qquad \mathrm{at} \, x = 0
+\end{equation}
+
+\begin{equation}
+\dfrac{\partial^2 U}{\partial x \partial t} + \dfrac{1}{c} \dfrac{\partial^2 U}{\partial t^2} = 0 \qquad \mathrm{at} \, x = d
+\end{equation}
+
+in order to be able to use the following expressions for the partial
+derivatives
+
+\begin{align}
+\left . \dfrac{\partial^2 W}{\partial x \partial t} \right |^n_{1/2} &= \dfrac{1}{2} \left [ \left( \dfrac{W \big|_{1}^{n+1} - W \big|_{0}^{n+1} }{\Delta t \Delta x} \right ) - \left( \dfrac{W \big|_{1}^{n-1} - W \big|_{0}^{n-1} }{\Delta t \Delta x} \right ) \right ] 
+\\
+&= \dfrac{1}{2} \left [ \left( \dfrac{W \big|_{i}^{n+1} - W \big|_{i-1}^{n+1} }{\Delta t \Delta x} \right ) - \left( \dfrac{W \big|_{i}^{n-1} - W \big|_{i-1}^{n-1} }{\Delta t \Delta x} \right ) \right ]
+\end{align}
+
+\begin{align}
+\left . \dfrac{\partial^2 W}{\partial t^2} \right |^n_{1/2} &= \dfrac{1}{2} \left [ \left ( \dfrac{W \big|^{n+1}_{0} - 2 W \big|^{n}_{0} + W \big |^{n-1}_{0}}{(\Delta t)^2} \right ) + \left ( \dfrac{W \big|^{n+1}_{1} - 2 W \big|^{n}_{1} + W \big |^{n-1}_{1}}{(\Delta t)^2} \right ) \right ] 
+\\
+&= \dfrac{1}{2} \left [ \left ( \dfrac{W \big|^{n+1}_{i-1} - 2 W \big|^{n}_{i-1} + W \big |^{n-1}_{i-1}}{(\Delta t)^2} \right ) + \left ( \dfrac{W \big|^{n+1}_{i} - 2 W \big|^{n}_{i} + W \big |^{n-1}_{i}}{(\Delta t)^2} \right ) \right ]
+\end{align}
+
+    At \(x=0\), we want to obtain the function at the next time step given
+the information from the previous cycle. Here, we are looking for
+\(W \Big|^{n+1}_{0}\). Substituting the expressions for the partial
+derivatives into the wave equation yields
+
+\begin{equation}
+W \big|^{n+1}_{0} = - W \big|_{1}^{n-1} + \left(\dfrac{c \Delta t - \Delta x}{c \Delta t + \Delta x}\right )\left (W \big|_{1}^{n+1}+W \big|_{0}^{n-1}\right )+\dfrac{2 \Delta x}{c \Delta t + \Delta x}\left( {W \big|^{n}_{0}}+ {W \big|^{n}_{1}}\right )
+\end{equation}
+
+In the code, we will initialize all values of \(W\) to be zero.
+
+At one iteration, we have the value for \(W \Big|_{1}^{n+1}\). After we
+use the above equation to obtain \(W \Big|^{n+1}_{0}\), the program will
+then transfer the information in the variable \(W \Big|^{n-1}\) to
+\(W \Big|^{n}\), and \(W \Big|^{n}\) to \(W \Big|^{n+1}\), so that the
+following iteration can use these values.
+
+    Similarly at the other side of the boundary, we want to obtain
+\(W \Big|_{i}^{n+1}\).
+
+\begin{equation}
+W \big|_{i}^{n+1} = - W \big|_{i-1}^{n-1} + \left (W \big|_{i-1}^{n+1} + W \big |^{n-1}_{i} \right ) \left(\dfrac{c \Delta t - \Delta x}{c \Delta t + \Delta x}\right) + \dfrac{2 \Delta x}{c \Delta t + \Delta x}\left(W \big|^{n}_{i} + W \big|^{n}_{i-1} \right) 
+\end{equation}
+
+Similar to the left side of the boundary, we initialize all values of
+\(W\) at zero. At a given iteration, we have \(W \Big |_{i-1}^{n+1}\).
+After solving for \(W \Big|_{i}^{n+1}\), the program will cycle through
+the variables in the same process as described in the left boundary.
+
+    \section{Python Implementation}\label{python-implementation}
+
+First, we start with importing several libraries for plotting,
+mathematical functions, and numpy for the arrays. The variable fignum is
+also defined; this is used to create several plots of the field.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{pyplot} \PY{k}{as} \PY{n}{plt}
+        
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{math} \PY{k}{as} \PY{n+nn}{m}
+        
+        \PY{n}{fignum} \PY{o}{=} \PY{l+m+mi}{0}
+\end{Verbatim}
+
+    We then define constants for the size of the spatial domain \(nx\), the
+wave impedance \(Z = \sqrt{\frac{\mu}{\epsilon}}\), and the speed of
+light \(c = \frac{1}{\sqrt{\mu \epsilon}}\). We assume that the field is
+propagating in vacuum, hence \(\epsilon = 1\) and \(\mu = 1\). The
+spatial domain size is defined arbitrarily.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{nx} \PY{o}{=} \PY{l+m+mi}{300}
+        \PY{n}{imp0} \PY{o}{=} \PY{l+m+mf}{337.0}
+        \PY{n}{epsilon} \PY{o}{=} \PY{l+m+mi}{1}
+        \PY{n}{c} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{epsilon}\PY{p}{)}
+\end{Verbatim}
+
+    For the Gaussian source, we introduce variables for its location, width,
+and delay. The location of the source is placed at the center of the
+domain, the width is defined arbitrarily, and the ratio of the delay
+with respect to the source is taken from the previous task.
+
+We also define the temporal domain at this point. The term nx+srcdel is
+taken from the previous task, with the factor 1.5 added in order to view
+the field as it interacts with the boundary conditions.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{srcori} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{nx}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}              \PY{c+c1}{\PYZsh{}source origin}
+        \PY{n}{srcwid} \PY{o}{=} \PY{l+m+mf}{30.0}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{epsilon}\PY{p}{)}  \PY{c+c1}{\PYZsh{}source width}
+        \PY{n}{srcdel} \PY{o}{=} \PY{l+m+mi}{10}\PY{o}{*}\PY{n}{srcwid}              \PY{c+c1}{\PYZsh{}source delay}
+        \PY{n}{nt} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{l+m+mf}{1.5}\PY{o}{*}\PY{n}{nx}\PY{o}{+}\PY{n}{srcdel}\PY{p}{)}
+\end{Verbatim}
+
+    Now, we create arrays for the \(E_z\) and \(H_y\) components of the
+field, along with an array \(x\) for the spatial coordinates. Both
+fields are initialized at zero.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{ez} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{nx}\PY{p}{)}
+        \PY{n}{hy} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{nx}\PY{p}{)}
+        \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{nx}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+    Note that we defined the domain as integer steps, not as a real spatial
+interval divided into smaller intervals. Hence, the step \(dx\) and
+\(dt\) are already predefined as unity. We define the constants \(a\)
+and \(b\) such that
+
+\begin{equation}
+a = \dfrac{c \Delta t - \Delta x}{c \Delta t + \Delta x}
+\end{equation}\begin{equation}
+b = \dfrac{2 \Delta x}{c \Delta t + \Delta x}
+\end{equation}
+
+and we assign these to variables
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{a} \PY{o}{=} \PY{p}{(}\PY{n}{c}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{c}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{b} \PY{o}{=} \PY{l+m+mi}{2}\PY{o}{/}\PY{p}{(}\PY{n}{c} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+    We also define variables for the boundary conditions, for both sides of
+the E-field and for both sides of the H-field. At the left, we have
+
+\begin{align}
+hwnp10 \rightarrow H \Big |^{n+1} _{0}  &\qquad ewnp10 \rightarrow E |^{n+1} _{0}
+\\
+hwnm11 \rightarrow H \Big |^{n-1} _{0}  &\qquad ewnm11 \rightarrow E |^{n-1} _{0}
+\\
+hwnp11 \rightarrow H \Big |^{n+1} _{1}  &\qquad ewnp11 \rightarrow E |^{n+1} _{1}
+\\
+hwnm10 \rightarrow H \Big |^{n-1} _{0} &\qquad ewnm10 \rightarrow E |^{n-1} _{0}
+\\
+hwn0 \rightarrow H \Big |^{n} _{0} &\qquad ewn0  \rightarrow E |^{n} _{0}
+\\
+hwn1 \rightarrow H \Big |^{n} _{1} &\qquad ewn1 \rightarrow E |^{n} _{1}
+\end{align}
+
+And at the right,
+
+\begin{align}
+hwnp1im1 \rightarrow H \Big |^{n+1} _{i-1}  &\qquad ewnp1im1 \rightarrow E |^{n+1} _{i-1}
+\\
+hwnm1i \rightarrow H \Big |^{n-1} _{i-1}  &\qquad ewnm1i \rightarrow E |^{n-1} _{i-1}
+\\
+hwnp1i \rightarrow H \Big |^{n+1} _{i}  &\qquad ewnp1i \rightarrow E |^{n+1} _{i}
+\\
+hwnm1im1 \rightarrow H \Big |^{n-1} _{i-1} &\qquad ewnm1im1 \rightarrow E |^{n-1} _{i-1}
+\\
+hwnim1 \rightarrow H \Big |^{n} _{i-1} &\qquad ewnim1  \rightarrow E |^{n} _{i-1}
+\\
+hwni \rightarrow H \Big |^{n} _{i} &\qquad ewni \rightarrow E |^{n} _{i}
+\end{align}
+
+All of these variables are initialized to zero as the field is initially
+zero.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{hwnp10}\PY{p}{,} \PY{n}{ewnp10} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0} \PY{c+c1}{\PYZsh{} W | \PYZca{}\PYZob{}n+1\PYZcb{} \PYZus{}\PYZob{}0\PYZcb{}}
+        \PY{n}{hwnm11}\PY{p}{,} \PY{n}{ewnm11} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0} \PY{c+c1}{\PYZsh{} W | \PYZca{}\PYZob{}n\PYZhy{}1\PYZcb{} \PYZus{}\PYZob{}1\PYZcb{}}
+        \PY{n}{hwnp11}\PY{p}{,} \PY{n}{ewnp11} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0} \PY{c+c1}{\PYZsh{} W | \PYZca{}\PYZob{}n+1\PYZcb{} \PYZus{}\PYZob{}1\PYZcb{}}
+        \PY{n}{hwnm10}\PY{p}{,} \PY{n}{ewnm10} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0} \PY{c+c1}{\PYZsh{} W | \PYZca{}\PYZob{}n\PYZhy{}1\PYZcb{} \PYZus{}\PYZob{}0\PYZcb{}}
+        \PY{n}{hwn0}  \PY{p}{,} \PY{n}{ewn0}   \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0} \PY{c+c1}{\PYZsh{} W | \PYZca{}\PYZob{}n  \PYZcb{} \PYZus{}\PYZob{}0\PYZcb{}}
+        \PY{n}{hwn1}  \PY{p}{,} \PY{n}{ewn1}   \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0} \PY{c+c1}{\PYZsh{} W | \PYZca{}\PYZob{}n  \PYZcb{} \PYZus{}\PYZob{}1\PYZcb{}}
+        
+        \PY{n}{hwnp1im1}\PY{p}{,} \PY{n}{ewnp1im1} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0} \PY{c+c1}{\PYZsh{} W | \PYZca{}\PYZob{}n+1\PYZcb{} \PYZus{}\PYZob{}i\PYZhy{}1\PYZcb{}}
+        \PY{n}{hwnm1i}  \PY{p}{,} \PY{n}{ewnm1i}   \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0} \PY{c+c1}{\PYZsh{} W | \PYZca{}\PYZob{}n\PYZhy{}1\PYZcb{} \PYZus{}\PYZob{}i  \PYZcb{}}
+        \PY{n}{hwnp1i}  \PY{p}{,} \PY{n}{ewnp1i}   \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0} \PY{c+c1}{\PYZsh{} W | \PYZca{}\PYZob{}n+1\PYZcb{} \PYZus{}\PYZob{}i  \PYZcb{}}
+        \PY{n}{hwnm1im1}\PY{p}{,} \PY{n}{ewnm1im1} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0} \PY{c+c1}{\PYZsh{} W | \PYZca{}\PYZob{}n\PYZhy{}1\PYZcb{} \PYZus{}\PYZob{}i\PYZhy{}1\PYZcb{}}
+        \PY{n}{hwnim1}  \PY{p}{,} \PY{n}{ewnim1}   \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0} \PY{c+c1}{\PYZsh{} W | \PYZca{}\PYZob{}n  \PYZcb{} \PYZus{}\PYZob{}i\PYZhy{}1\PYZcb{}}
+        \PY{n}{hwni}    \PY{p}{,} \PY{n}{ewni}     \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0} \PY{c+c1}{\PYZsh{} W | \PYZca{}\PYZob{}n  \PYZcb{} \PYZus{}\PYZob{}i  \PYZcb{}}
+\end{Verbatim}
+
+    For the actual loop, we begin with modifying the loop of the field with
+an additive source from the previous task. The source is a Gaussian
+field at the origin, defined here in line 24. The electric and magnetic
+fields propagate in lines 5 and 24.
+
+In applying the boundary conditions at the left, we begin with setting
+the variable \(H \Big |^{n+1} _{1}\) (\(E \Big |^{n+1} _{1}\)) using the
+field that was obtained in line 5(24). then we use the equation that we
+derived for \(H \Big |^{n+1} _{0}\)(\$ E \Big \textbar{}\^{}\{n+1\}
+\_\{0\}\$) in line 9(29). This then becomes the initial value of the
+field at \(x=0\) for the next iteration. We then cycle through the
+values of \(H\)(\(E\)) which will be used for the next run of the loop.
+
+Similarly to the right, we begin with
+\(H \Big |^{n+1} _{i-1}\)(\(E \Big |^{n+1} _{i-1}\)), and assign to this
+the value of the field at at \(nx-2\) (note that the field goes only
+from \(0\) to \(nx-1\)). In order to obtain the field at \(nx-1\), we
+use the previously derived equation and assign this to the array at
+\(x=nx-1\). Then we also cycle through the values of \(H\)(\(E\)) for
+the next iteration.
+
+The code starting from line 41 is used to plot the fields.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k}{for} \PY{n}{dt} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{nt}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+            \PY{c+c1}{\PYZsh{}Magnetic field}
+            \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+            \PY{n}{hy}\PY{p}{[}\PY{n}{x}\PY{p}{]} \PY{o}{=} \PY{n}{hy}\PY{p}{[}\PY{n}{x}\PY{p}{]} \PY{o}{+} \PY{p}{(}\PY{n}{ez}\PY{p}{[}\PY{n}{x}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{ez}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{n}{imp0}
+        
+            \PY{c+c1}{\PYZsh{}abc at left}
+            \PY{n}{hwnp11} \PY{o}{=} \PY{n}{hy}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+            \PY{n}{hwnp10} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{hwnm11} \PY{o}{+} \PY{n}{a}\PY{o}{*}\PY{p}{(}\PY{n}{hwnp11} \PY{o}{+} \PY{n}{hwnm10}\PY{p}{)} \PY{o}{+} \PY{n}{b}\PY{o}{*}\PY{p}{(}\PY{n}{hwn0} \PY{o}{+} \PY{n}{hwn1}\PY{p}{)}
+            \PY{n}{hy}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{hwnp10}
+            \PY{n}{hwnm11}\PY{p}{,} \PY{n}{hwnm10} \PY{o}{=} \PY{n}{hwn1}\PY{p}{,} \PY{n}{hwn0}
+            \PY{n}{hwn1}\PY{p}{,} \PY{n}{hwn0}  \PY{o}{=} \PY{n}{hwnp11}\PY{p}{,} \PY{n}{hwnp10}
+            
+            \PY{c+c1}{\PYZsh{}abc at right}
+            \PY{n}{hwnp1im1} \PY{o}{=} \PY{n}{hy}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{]}
+            \PY{n}{hwnp1i} \PY{o}{=} \PY{o}{\PYZhy{}} \PY{n}{hwnm1im1} \PY{o}{+} \PY{n}{a}\PY{o}{*}\PY{p}{(}\PY{n}{hwnp1im1} \PY{o}{+} \PY{n}{hwnm1i}\PY{p}{)} \PY{o}{+} \PY{n}{b}\PY{o}{*}\PY{p}{(}\PY{n}{hwnp1i} \PY{o}{+} \PY{n}{hwnim1}\PY{p}{)}
+            \PY{n}{hy}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{hwnp1i}
+            \PY{n}{hwnm1i}\PY{p}{,} \PY{n}{hwnm1im1} \PY{o}{=} \PY{n}{hwni}\PY{p}{,} \PY{n}{hwnim1}
+            \PY{n}{hwni}\PY{p}{,} \PY{n}{hwnim1}  \PY{o}{=} \PY{n}{hwnp1i}\PY{p}{,} \PY{n}{hwnp1im1}
+            
+            \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+            \PY{c+c1}{\PYZsh{}Electric field}
+            \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+            \PY{n}{ez}\PY{p}{[}\PY{n}{x}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{ez}\PY{p}{[}\PY{n}{x}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{p}{(}\PY{n}{hy}\PY{p}{[}\PY{n}{x}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{hy}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n}{imp0}\PY{o}{/}\PY{n}{epsilon}
+            \PY{n}{ez}\PY{p}{[}\PY{n}{srcori}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{n}{m}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{p}{(}\PY{p}{(}\PY{n}{dt}\PY{o}{\PYZhy{}}\PY{n}{srcdel}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{n}{dt}\PY{o}{\PYZhy{}}\PY{n}{srcdel}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{srcwid}\PY{o}{*}\PY{n}{srcwid}\PY{p}{)}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{}abc at left}
+            \PY{n}{ewnp11} \PY{o}{=} \PY{n}{ez}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+            \PY{n}{ewnp10} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{ewnm11} \PY{o}{+} \PY{n}{a}\PY{o}{*}\PY{p}{(}\PY{n}{ewnp11} \PY{o}{+} \PY{n}{ewnm10}\PY{p}{)} \PY{o}{+} \PY{n}{b}\PY{o}{*}\PY{p}{(}\PY{n}{ewn0} \PY{o}{+} \PY{n}{ewn1}\PY{p}{)}
+            \PY{n}{ez}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{ewnp10}
+            \PY{n}{ewnm11}\PY{p}{,} \PY{n}{ewnm10} \PY{o}{=} \PY{n}{ewn1}\PY{p}{,} \PY{n}{ewn0}
+            \PY{n}{ewn1}\PY{p}{,} \PY{n}{ewn0}  \PY{o}{=} \PY{n}{ewnp11}\PY{p}{,} \PY{n}{ewnp10}
+            
+            \PY{c+c1}{\PYZsh{}abc at right}
+            \PY{n}{ewnp1im1} \PY{o}{=} \PY{n}{ez}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{]}
+            \PY{n}{ewnp1i} \PY{o}{=} \PY{o}{\PYZhy{}} \PY{n}{ewnm1im1} \PY{o}{+} \PY{n}{a}\PY{o}{*}\PY{p}{(}\PY{n}{ewnp1im1} \PY{o}{+} \PY{n}{ewnm1i}\PY{p}{)} \PY{o}{+} \PY{n}{b}\PY{o}{*}\PY{p}{(}\PY{n}{ewnp1i} \PY{o}{+} \PY{n}{ewnim1}\PY{p}{)}
+            \PY{n}{ez}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{ewnp1i}
+            \PY{n}{ewnm1i}\PY{p}{,} \PY{n}{ewnm1im1} \PY{o}{=} \PY{n}{ewni}\PY{p}{,} \PY{n}{ewnim1}
+            \PY{n}{ewni}\PY{p}{,} \PY{n}{ewnim1}  \PY{o}{=} \PY{n}{ewnp1i}\PY{p}{,} \PY{n}{ewnp1im1}
+        
+            \PY{n}{plt}\PY{o}{.}\PY{n}{hold}\PY{p}{(}\PY{k+kc}{True}\PY{p}{)}
+            \PY{k}{if} \PY{p}{(}\PY{n}{dt} \PY{o}{\PYZpc{}} \PY{l+m+mi}{60} \PY{o}{==} \PY{l+m+mi}{0} \PY{o+ow}{or} \PY{n}{dt} \PY{o}{==} \PY{n}{nt}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+                \PY{n}{fignum} \PY{o}{=} \PY{n}{fignum} \PY{o}{+} \PY{l+m+mi}{1}
+                \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{fignum}\PY{p}{)}
+                \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Position}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Amplitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Field at t = }\PY{l+s+s2}{\PYZdq{}}\PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{dt}\PY{p}{)}\PY{p}{)}
+                \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{ez}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{E\PYZhy{}field}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{hy}\PY{o}{*}\PY{n}{imp0}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{H\PYZhy{}field}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{task1_files/task1_17_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{task1_files/task1_17_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{task1_files/task1_17_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{task1_files/task1_17_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{task1_files/task1_17_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{task1_files/task1_17_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{task1_files/task1_17_6.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{task1_files/task1_17_7.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{task1_files/task1_17_8.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{task1_files/task1_17_9.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{task1_files/task1_17_10.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{task1_files/task1_17_11.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{task1_files/task1_17_12.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{task1_files/task1_17_13.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{References}\label{references}
+
+Taflove, A. \& Hagness, S. C. \emph{Computational electrodynamics: the
+finite-difference time-domain method}. (Artech House, 2005).
+
+Engquist, B. \& Majda, A. \emph{Absorbing boundary conditions for
+numerical simulation of waves}. Proc Natl Acad Sci U S A 74, 1765--1766
+(1977).
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
