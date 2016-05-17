@@ -1,0 +1,686 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass{article}
+
+    
+    
+    \usepackage{graphicx} % Used to insert images
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{color} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage{ulem} % ulem is needed to support strikethroughs (\sout)
+    
+
+    
+    
+    \definecolor{orange}{cmyk}{0,0.4,0.8,0.2}
+    \definecolor{darkorange}{rgb}{.71,0.21,0.01}
+    \definecolor{darkgreen}{rgb}{.12,.54,.11}
+    \definecolor{myteal}{rgb}{.26, .44, .56}
+    \definecolor{gray}{gray}{0.45}
+    \definecolor{lightgray}{gray}{.95}
+    \definecolor{mediumgray}{gray}{.8}
+    \definecolor{inputbackground}{rgb}{.95, .95, .85}
+    \definecolor{outputbackground}{rgb}{.95, .95, .95}
+    \definecolor{traceback}{rgb}{1, .95, .95}
+    % ansi colors
+    \definecolor{red}{rgb}{.6,0,0}
+    \definecolor{green}{rgb}{0,.65,0}
+    \definecolor{brown}{rgb}{0.6,0.6,0}
+    \definecolor{blue}{rgb}{0,.145,.698}
+    \definecolor{purple}{rgb}{.698,.145,.698}
+    \definecolor{cyan}{rgb}{0,.698,.698}
+    \definecolor{lightgray}{gray}{0.5}
+    
+    % bright ansi colors
+    \definecolor{darkgray}{gray}{0.25}
+    \definecolor{lightred}{rgb}{1.0,0.39,0.28}
+    \definecolor{lightgreen}{rgb}{0.48,0.99,0.0}
+    \definecolor{lightblue}{rgb}{0.53,0.81,0.92}
+    \definecolor{lightpurple}{rgb}{0.87,0.63,0.87}
+    \definecolor{lightcyan}{rgb}{0.5,1.0,0.83}
+    
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Task 2: Convolutional perfectly matched
+layer}
+    \author{Ang, Angeleene S.}
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=blue,
+      linkcolor=darkorange,
+      citecolor=darkgreen,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \subsection*{Derivation}\label{derivation}
+
+An alternative method in creating a simulation space with seemingly
+endless boundaries is the perfectly matched layer (PML). These layers
+are created such that any incident wave propagating inside the PML is
+absorbed, and another requirement is that the PML must have zero
+reflection at the interface.
+
+The process in which this happens is as follows: An incident wave will
+initially enter the PML domain, and will be attenuated by a rate
+\(\alpha_{PML}\) over the thickness of the layer \(\Delta PML\), and
+then be reflected at the edge of the simulation space, which has a
+perfect electric conductor.
+
+After reflection, the wave will still be inside the PML domain, so it
+will be attenuated again at a rate \(\alpha_{PML}\) in the layer. As a
+result, the wave will be attenuated by a factor
+\(e^{-2 \alpha_{PML} \Delta PML}\). This reflection factor, in the more
+general 2D case, is of the form
+
+\begin{equation}
+R(\theta) = e^{-2 \eta \cos \theta \int_{0}^{\Delta PML} \sigma(x) \mathrm{d} x }
+\end{equation}
+
+however, in 1D, the incident wave is always at normal incidence to the
+boundary. We can take the reflection factor to be a constant
+
+\begin{equation}
+R(0) = 10^{-6}
+\end{equation}
+
+    In order to reduce the reflection error from the discretization of the
+domain, Bérenger introduced grading the PML conductivity \(\sigma\)
+smoothly, from zero to some maximum value at the boundary. One variation
+of this grading is the polynomial grading, in which the conductivity
+inside the PML is given by
+
+\begin{equation}
+\sigma(x) = \sigma_{max} \left( \dfrac{x}{\Delta PML} \right)^m 
+\end{equation}
+
+Here, \(m\) is the order of polynomial grading; \(3 \leq m \leq 4\) has
+been found to be optimal for FDTD, and the maximum conductivity
+\(\sigma_{max}\) is given by
+
+\begin{equation}
+\sigma_{max} = -\dfrac{(m+1) \ln[R(0)]}{2\eta \Delta PML}
+\end{equation}
+
+    In this task, we use the complex-frequency-shifted (CFS) PML method
+derived by Roden and Gedney. We start with Ampere's Law in the frequency
+domain
+
+\begin{equation}
+i \omega \epsilon E_z = \dfrac{1}{s_E} \dfrac{\partial H_y}{\partial x}
+\end{equation}
+
+in which the material where field propagates in outside the PML has zero
+losses, and where \(s_E\) is some constant given by
+
+\begin{equation}
+s_E = 1 + \dfrac{\sigma}{i \omega \epsilon_0}
+\end{equation}
+
+The subscript \(E\) indicates that this \(s\) is related to the electric
+field. In the code, \(s_E\) and \(s_H\) have a small shift due to how
+the grid is defined. Transforming the equation for \(E_z\) into the time
+domain,
+
+\begin{equation}
+\epsilon \dfrac{\partial E_z}{\partial t} = \bar{s_E} * \dfrac{\partial H_y}{\partial x}
+\end{equation}
+
+where \(\bar{s_E}\) is defined as the Laplace transform of the original
+\(s_E\), and \(*\) indicates the convolution operator. The function
+\(\bar{s_E}\) is given by
+
+\begin{equation}
+\bar{s_E} = \delta(t) + \zeta_E(t)
+\end{equation}
+
+hence
+
+\begin{equation}
+\epsilon \dfrac{\partial E_z}{\partial t} = \dfrac{\partial H_y}{\partial x} + \zeta_E(t) * \dfrac{\partial H_y}{\partial x}
+\end{equation}
+
+    It can be shown that the discrete response of \(\zeta_E (t)\) is given
+by
+
+\begin{equation}
+Z_E (m) = a_E \; exp\left( \dfrac{\sigma m \Delta t}{\epsilon_0} \right)
+\end{equation}
+
+where the constant \(a_E\) is
+
+\begin{equation}
+a_E = \mathrm{exp}\left ( - \dfrac{\sigma \Delta t}{\epsilon_0} \right ) -1 
+\end{equation}
+
+    Using the discretization of the derivatives, the update equation based
+on Ampere's Law now becomes
+
+\begin{equation}
+\epsilon \dfrac{1}{\Delta t} \left ( E_z \Big |^{n+1}_{i} - E_z \Big |^{n}_{i} \right ) = \dfrac{1}{\Delta x} \left ( H_y \Big |^{n+1/2}_{i+1/2} - H_y \Big |^{n+1/2}_{i-1/2} \right ) + \sum^{N-1}_{m=0} \dfrac{1}{\Delta x} Z_E (m) \left ( H_y \Big |^{n-m+1/2}_{i+1/2} - H_y \Big |^{n-m+1/2}_{i-1/2} \right )
+\end{equation}
+
+from the form of \(Z_E\), the convolution can be performed in a simpler
+manner if we introduced a variable \(\psi_E\) such that we obtain an
+update equation
+
+\begin{equation}
+\epsilon \dfrac{1}{\Delta t} \left ( E_z \Big |^{n+1}_{i} - E_z \Big |^{n}_{i} \right ) = \dfrac{1}{\Delta x} \left ( H_y \Big |^{n+1/2}_{i+1/2} - H_y \Big |^{n+1/2}_{i-1/2} \right ) + \psi_E \Big |^{n+1/2}_{i+1/2}
+\end{equation}
+
+The subscript indicates that this is the \(\psi\) associated with
+updating the electric field. This variable is defined such that
+
+\begin{equation}
+\psi_E \Big |^{n+1/2}_{i+1/2} = b_E \psi_E \Big |^{n-1/2}_{i+1/2} + \dfrac{a_E}{\Delta x} \left ( H_y \Big |^{n+1/2}_{i+1/2} - H_y \Big |^{n+1/2}_{i-1/2} \right )
+\end{equation}
+
+where the constant \(b_E\) defined as
+
+\begin{equation}
+b_E = \mathrm{exp}\left ( - \dfrac{\sigma \Delta t}{\epsilon_0} \right )
+\end{equation}
+
+Solving thre update equation for \(E_z \Big |^{n+1}_{i+1/2}\),
+
+\begin{equation}
+E_z \Big |^{n+1}_{i} = E_z \Big |^{n}_{i} + \dfrac{1}{\epsilon} \dfrac{\Delta t}{\Delta x} \left ( H_y \Big |^{n+1/2}_{i+1/2} - H_y \Big |^{n+1/2}_{i-1/2} \right ) + \Delta t \dfrac{1}{\epsilon} \psi_E \Big |^{n+1/2}_{i+1/2}
+\end{equation}
+
+    Using a similar expression from Faraday's Law
+
+\begin{equation}
+i \omega \mu H_y = \dfrac{1}{s_H} \dfrac{\partial E_z}{\partial x}
+\end{equation}
+
+we obtain the following update equation
+
+\begin{equation}
+\mu \dfrac{1}{\Delta t} \left ( H_y \Big |^{n+1/2}_{i+1/2} - H_y \Big |^{n-1/2}_{i+1/2} \right ) = \dfrac{1}{\Delta x} \left ( E_z \Big |^{n}_{i+1} - E_z \Big |^{n}_{i} \right ) + \psi_H \Big |^{n}_{i+1}
+\end{equation}
+
+in which \(\psi_H\), \(a_H\), and \(b_H\) are defined similarly
+
+\begin{equation}
+\psi_H \Big |^{n}_{i+1} = b_H \psi_H \Big |^{n-1/2}_{i+1/2} + \dfrac{a_H}{\Delta x} \left ( E_z \Big |^{n}_{i+1} - E_z \Big |^{n}_{i} \right )
+\end{equation}
+
+\begin{equation}
+a_H = \mathrm{exp}\left ( - \dfrac{\sigma \Delta t}{\epsilon_0} \right ) -1 
+\end{equation}
+
+\begin{equation}
+b_H = \mathrm{exp}\left ( - \dfrac{\sigma \Delta t}{\epsilon_0} \right )
+\end{equation}
+
+So the update equation is now
+
+\begin{equation}
+H_y \Big |^{n+1/2}_{i+1/2} =  H_y \Big |^{n-1/2}_{i+1/2} + \dfrac{1}{\mu} \dfrac{\Delta t}{\Delta x} \left ( E_z \Big |^{n}_{i+1} - E_z \Big |^{n}_{i} \right ) + \dfrac{1}{\mu} \Delta t \psi_H \Big |^{n}_{i+1}
+\end{equation}
+
+    Recall that
+
+\begin{equation}
+\dfrac{1}{\epsilon} \dfrac{\Delta t}{\Delta x} = \dfrac{\eta_0}{\epsilon_r} S_c \qquad \mathrm{and} \qquad 
+\dfrac{1}{\mu} \dfrac{\Delta t}{\Delta x} = \dfrac{1}{\mu_r \eta_0} S_c
+\end{equation}
+
+\textbackslash{}end\{equation\}
+
+and we note that in our implementation \(\Delta t\) and \(\Delta x\),
+and the Courant number are all set to unity.
+
+The final update equations are now
+
+\begin{equation}
+H_y \Big |^{n+1/2}_{i+1/2} =  H_y \Big |^{n-1/2}_{i+1/2} + \dfrac{1}{\mu_r \eta_0} \left ( E_z \Big |^{n}_{i+1} - E_z \Big |^{n}_{i} \right ) + \dfrac{1}{\mu_r \eta_0} \psi_H \Big |^{n}_{i+1}
+\end{equation}
+
+\begin{equation}
+E_z \Big |^{n+1}_{i} = E_z \Big |^{n}_{i} + \dfrac{\eta_0}{\epsilon_r} \left ( H_y \Big |^{n+1/2}_{i+1/2} - H_y \Big |^{n+1/2}_{i-1/2} \right ) + \dfrac{\eta_0}{\epsilon_r} \psi_E \Big |^{n+1/2}_{i+1/2}
+\end{equation}
+
+    \subsection*{Python implementation}\label{python-implementation}
+
+First, we begin with importing the libraries for plotting and for the
+mathematical functions used in the simulation.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+         \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{pyplot} \PY{k}{as} \PY{n}{plt}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{math} \PY{k}{as} \PY{n+nn}{m}
+         
+         \PY{n}{fignum} \PY{o}{=} \PY{l+m+mi}{0}
+\end{Verbatim}
+
+    We also define the size of the domain in both space and time, as well as
+a few other parameters for the source. Here, we also initialize the
+electric and magnetic fields to be zero, and the position array.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{epsilon} \PY{o}{=} \PY{l+m+mi}{25}                      \PY{c+c1}{\PYZsh{}permittivity}
+         \PY{n}{imp0} \PY{o}{=} \PY{l+m+mf}{337.0}                      \PY{c+c1}{\PYZsh{}impedance}
+         
+         \PY{n}{nx} \PY{o}{=} \PY{l+m+mi}{500}
+         
+         \PY{n}{srcori} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{nx}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}                \PY{c+c1}{\PYZsh{}source is at center}
+         \PY{n}{srcwid} \PY{o}{=} \PY{l+m+mf}{30.0}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{epsilon}\PY{p}{)}    \PY{c+c1}{\PYZsh{}source width}
+         \PY{n}{srcdel} \PY{o}{=} \PY{l+m+mi}{10}\PY{o}{*}\PY{n}{srcwid}                \PY{c+c1}{\PYZsh{}source delay}
+         
+         \PY{n}{nt} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{p}{(}\PY{n}{nx}\PY{o}{+}\PY{n}{srcdel}\PY{p}{)}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{epsilon}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{ez} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{nx}\PY{p}{)}
+         \PY{n}{hy} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{nx}\PY{p}{)}
+         \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{nx}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+    We define variables for the reflection factor \(R(0)\), the polynomial
+grading \(m\), the thickness of the PML \(\Delta PML\), and the maximum
+conductivity \(\sigma_{max}\)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{R0} \PY{o}{=} \PY{l+m+mi}{1}\PY{n}{e}\PY{o}{\PYZhy{}}\PY{l+m+mi}{6}          \PY{c+c1}{\PYZsh{} reflection factor}
+         \PY{n}{gra} \PY{o}{=} \PY{l+m+mi}{4}             \PY{c+c1}{\PYZsh{} order of polynomial grading}
+         \PY{n}{dpml} \PY{o}{=} \PY{l+m+mi}{10}           \PY{c+c1}{\PYZsh{} number of PML cells}
+         
+         \PY{n}{smax} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{p}{(}\PY{p}{(}\PY{n}{gra}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{*}\PY{n}{m}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{R0}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{imp0}\PY{o}{*}\PY{n}{dpml}\PY{p}{)}
+\end{Verbatim}
+
+    Defining the polynomial grading at the boundaries.
+
+Here we define the arrays \texttt{es} and \texttt{hs} for the complex
+phase \(\psi\) for the electric and magnetic fields. Note that the are
+only defined from 0 to \(\Delta PML\) on the left side, and from \(nx\)
+to \(nx-\Delta PML\) on the other end; for anywhere else in the array,
+\texttt{es} and \texttt{hs} are zero.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{es} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{nx}\PY{p}{)}
+         \PY{n}{hs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{nx}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}polynomial gradng of the conductivity at the boundaries}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{dpml}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}for the left side of the PML}
+             \PY{n}{es}\PY{p}{[}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{smax}\PY{o}{*}\PY{p}{(}\PY{p}{(}\PY{n}{dpml}\PY{o}{\PYZhy{}}\PY{n}{i}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.5}\PY{p}{)}\PY{o}{/}\PY{n}{dpml}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{n}{gra}
+             \PY{n}{hs}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{smax}\PY{o}{*}\PY{p}{(}\PY{p}{(}\PY{n}{dpml}\PY{o}{\PYZhy{}}\PY{n}{i}\PY{p}{)}\PY{o}{/}\PY{n}{dpml}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{n}{gra}  
+             
+             \PY{c+c1}{\PYZsh{}for the right side of the PML}
+             \PY{n}{es}\PY{p}{[}\PY{n}{nx}\PY{o}{\PYZhy{}}\PY{n}{i}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{smax}\PY{o}{*}\PY{p}{(}\PY{p}{(}\PY{n}{dpml}\PY{o}{\PYZhy{}}\PY{n}{i}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.5}\PY{p}{)}\PY{o}{/}\PY{n}{dpml}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{n}{gra} 
+             \PY{n}{hs}\PY{p}{[}\PY{n}{nx}\PY{o}{\PYZhy{}}\PY{n}{i}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{smax}\PY{o}{*}\PY{p}{(}\PY{p}{(}\PY{n}{dpml}\PY{o}{\PYZhy{}}\PY{n}{i}\PY{p}{)}\PY{o}{/}\PY{n}{dpml}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{n}{gra}
+\end{Verbatim}
+
+    We define constants \(a\) and \(b\) for both electric and magnetic
+fields, and we initialize the array for the phase \(\psi\).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{ea} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{es}\PY{o}{*}\PY{n}{imp0}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+         \PY{n}{eb} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{es}\PY{o}{*}\PY{n}{imp0}\PY{p}{)}
+         
+         \PY{n}{ha} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{hs}\PY{o}{*}\PY{n}{imp0}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+         \PY{n}{hb} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{hs}\PY{o}{*}\PY{n}{imp0}\PY{p}{)}
+         
+         \PY{n}{psihy} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{nx}\PY{p}{)}
+         \PY{n}{psiez} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{nx}\PY{p}{)}
+\end{Verbatim}
+
+    The loop for generating the fields. Here, we added the added phase for
+the PML \texttt{psihy} and \texttt{psiez}. These phases change the
+fields at the PML domains.
+
+Notice that after each reflection, the field amplitude is drastically
+reduced, and the reflection is reduced as $\Delta PML$ is increased.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{k}{for} \PY{n}{dt} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{nt}\PY{p}{)}\PY{p}{:}
+             \PY{n}{psihy}\PY{p}{[}\PY{n}{x}\PY{p}{]} \PY{o}{=} \PY{n}{hb}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{o}{*}\PY{n}{psihy}\PY{p}{[}\PY{n}{x}\PY{p}{]} \PY{o}{+} \PY{n}{ha}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{o}{*}\PY{p}{(}\PY{n}{ez}\PY{p}{[}\PY{n}{x}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{ez}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{)}
+             \PY{n}{hy}\PY{p}{[}\PY{n}{x}\PY{p}{]} \PY{o}{=} \PY{n}{hy}\PY{p}{[}\PY{n}{x}\PY{p}{]} \PY{o}{+} \PY{p}{(}\PY{n}{ez}\PY{p}{[}\PY{n}{x}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{ez}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{n}{imp0} \PY{o}{+} \PY{n}{psihy}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{o}{/}\PY{n}{imp0}
+             
+             \PY{n}{psiez}\PY{p}{[}\PY{n}{x}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{eb}\PY{p}{[}\PY{n}{x}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{*}\PY{n}{psiez}\PY{p}{[}\PY{n}{x}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{n}{ea}\PY{p}{[}\PY{n}{x}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{*}\PY{p}{(}\PY{n}{hy}\PY{p}{[}\PY{n}{x}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{hy}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{)}
+             \PY{n}{ez}\PY{p}{[}\PY{n}{x}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{ez}\PY{p}{[}\PY{n}{x}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{p}{(}\PY{n}{hy}\PY{p}{[}\PY{n}{x}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{hy}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n}{imp0}\PY{o}{/}\PY{n}{epsilon} \PY{o}{+} \PY{n}{psiez}\PY{p}{[}\PY{n}{x}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{*}\PY{n}{imp0}\PY{o}{/}\PY{n}{epsilon}
+         
+             \PY{n}{ez}\PY{p}{[}\PY{n}{srcori}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{n}{m}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{p}{(}\PY{p}{(}\PY{n}{dt}\PY{o}{\PYZhy{}}\PY{n}{srcdel}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{n}{dt}\PY{o}{\PYZhy{}}\PY{n}{srcdel}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{srcwid}\PY{o}{*}\PY{n}{srcwid}\PY{p}{)}\PY{p}{)}
+         
+             \PY{n}{plt}\PY{o}{.}\PY{n}{hold}\PY{p}{(}\PY{k+kc}{True}\PY{p}{)}
+             \PY{k}{if} \PY{p}{(}\PY{n}{dt} \PY{o}{\PYZpc{}} \PY{l+m+mi}{1000} \PY{o}{==} \PY{l+m+mi}{0} \PY{o+ow}{and} \PY{n}{dt} \PY{o}{\PYZlt{}} \PY{l+m+mi}{7000} \PY{p}{)}\PY{p}{:}
+                 \PY{n}{fignum} \PY{o}{=} \PY{n}{fignum} \PY{o}{+} \PY{l+m+mi}{1}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{fignum}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Field at t = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{dt}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Field Amplitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Position}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{ez}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{E\PYZhy{}Field}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{hy}\PY{o}{*}\PY{n}{imp0}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{H\PYZhy{}Field}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\subsection*{PML simulation results for $\Delta PML = 5$}
+
+    \begin{center}
+    \adjustimage{max size={0.5\linewidth}{0.5\paperheight}}{task2_files/5/task2_19_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.5\linewidth}{0.5\paperheight}}{task2_files/5/task2_19_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.5\linewidth}{0.5\paperheight}}{task2_files/5/task2_19_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.5\linewidth}{0.5\paperheight}}{task2_files/5/task2_19_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.5\linewidth}{0.5\paperheight}}{task2_files/5/task2_19_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.5\linewidth}{0.5\paperheight}}{task2_files/5/task2_19_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.5\linewidth}{0.5\paperheight}}{task2_files/5/task2_19_6.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+\subsection*{PML simulation results for $\Delta PML = 10$}
+
+    \begin{center}
+    \adjustimage{max size={0.5\linewidth}{0.5\paperheight}}{task2_files/10/task2_19_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.5\linewidth}{0.5\paperheight}}{task2_files/10/task2_19_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.5\linewidth}{0.5\paperheight}}{task2_files/10/task2_19_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.5\linewidth}{0.5\paperheight}}{task2_files/10/task2_19_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.5\linewidth}{0.5\paperheight}}{task2_files/10/task2_19_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.5\linewidth}{0.5\paperheight}}{task2_files/10/task2_19_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.5\linewidth}{0.5\paperheight}}{task2_files/10/task2_19_6.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+
+
+\subsection*{PML simulation results for $\Delta PML = 20$}
+
+    \begin{center}
+    \adjustimage{max size={0.5\linewidth}{0.5\paperheight}}{task2_files/20/task2_19_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.5\linewidth}{0.5\paperheight}}{task2_files/20/task2_19_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.5\linewidth}{0.5\paperheight}}{task2_files/20/task2_19_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.5\linewidth}{0.5\paperheight}}{task2_files/20/task2_19_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.5\linewidth}{0.5\paperheight}}{task2_files/20/task2_19_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.5\linewidth}{0.5\paperheight}}{task2_files/20/task2_19_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.5\linewidth}{0.5\paperheight}}{task2_files/20/task2_19_6.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+
+    \subsection*{References}\label{references}
+
+Inan, U. S. \& Marshall, R. A. \emph{Numerical electromagnetics: the
+FDTD method.} (Cambridge University Press, 2011).
+
+Roden, J. A. \& Gedney, S. D. \emph{Convolution PML (CPML): An efficient
+FDTD implementation of the CFS-PML for arbitrary media.} Microwave and
+Optical Technology Letters 27, 334--339 (2000).
+
+Schneider, J. B. \emph{Understanding the finite-difference time-domain
+method.} School of electrical engineering and computer science
+Washington State University.--URL: http://www. Eecs. Wsu. Edu/∼
+schneidj/ufdtd/(request data: 29.11. 2012) (2010).
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
