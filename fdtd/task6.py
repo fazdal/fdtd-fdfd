@@ -17,19 +17,19 @@ import math as m
 fignum = 0
 
 #some toggles for the plot
-show_field_difference = 0
+show_field_difference = 1
 show_efield_and_refefield = 0
 show_efield_only = 0
-show_left_only = 1
+show_left_only = 0
 # In[133]:
 
-nx = 1000
+nx = 400
 imp0 = 337.0
 
-wavelength = int(nx/10)
-factor = 2
-epshost = 1.5
-epsmat = 2
+wavelength = int(nx/5)
+factor = 4
+epshost = 1.2
+epsmat = 4
 
 nhost = np.sqrt(epshost)
 nmat = np.sqrt(epsmat)
@@ -39,13 +39,18 @@ thickness = wavelength/factor
 
 #rescale thickness and nmat
 nmat = ((thickness*nhost)/int(scale*thickness))
-thickness = int(scale*wavelength/factor)
+thickness = int(scale*thickness)
+
+#nright = (nmat**2)/nhost
+nright = nhost/scale
+epsright = nright**2
 
 epsmat = nmat**2
 eps = np.zeros(nx)
 eps[:] = epshost
 eps[int(nx/2):int(nx/2+thickness)] = epsmat
-        
+eps[int(nx/2+thickness):] = epsright
+
 #need to show a version of the efield without the material
 #everything that starts with "ref" is used for the reference
 refeps= np.zeros(nx)
@@ -56,7 +61,7 @@ refeps[:] = epshost
 srcori = int(nx/10)              #source origin
 srcwid = wavelength*3.0*np.sqrt(max(epshost,epsmat))
 srcdel = 10*srcwid              #source delay
-nt = int(4*nx+srcdel)
+nt = int(10*nx+srcdel)
 
 
 # In[135]:
@@ -227,19 +232,17 @@ for dt in range(0,nt):
         plt.figure(fignum)
         plt.xlabel("Position")
         plt.ylabel("Amplitude")
+        plt.axvspan(nx/2, thickness+nx/2, facecolor='g', alpha=0.25)
 
         if (show_field_difference):
-            plt.axvspan(nx/2, thickness+nx/2, facecolor='g', alpha=0.25)
             plt.title("Field Difference at t = "+ str(dt))        
             plt.plot(ez-refez, label="E-field")        
         elif (show_efield_and_refefield):
-            plt.axvspan(nx/2, thickness+nx/2, facecolor='g', alpha=0.25)
             plt.title("Field at t = "+ str(dt))        
             plt.plot(ez, label="E-field")                
             plt.plot(refez, label="Ref. E-field")                
             plt.legend()
         elif (show_efield_only):
-            plt.axvspan(nx/2, thickness+nx/2, facecolor='g', alpha=0.25)
             plt.title("Field at t = "+ str(dt))        
             plt.plot(ez, label="E-field")                
         elif (show_left_only):
