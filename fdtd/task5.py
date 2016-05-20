@@ -205,7 +205,7 @@ for dt in range(0,nt):
     else:
         amp = m.exp(-((dt-srcdel)*(dt-srcdel))/(srcwid*srcwid))
     refez[srcori] += amp/np.sqrt(epshost)*np.sin(2*np.pi*dt*lc/wavelength)
-
+ 
     #abc at left
     refewnp11 = refez[1]
     refewnp10 = -refewnm11 + refla*(refewnp11 + refewnm10) + reflb*(refewn0 + refewn1)
