@@ -23,7 +23,7 @@ show_efield_only = 0
 show_left_only = 1
 # In[133]:
 
-nx = 1000
+nx = 2000
 imp0 = 337.0
 
 wavelength = int(nx/10)

@@ -41,8 +41,7 @@ thickness = wavelength/factor
 nmat = ((thickness*nhost)/int(scale*thickness))
 thickness = int(scale*thickness)
 
-#nright = (nmat**2)/nhost
-nright = nhost/scale
+nright = nmat**2/nhost**2
 epsright = nright**2
 
 epsmat = nmat**2
