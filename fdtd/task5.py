@@ -23,10 +23,10 @@ show_efield_only = 0
 show_left_only = 1
 # In[133]:
 
-nx = 2000
-imp0 = 337.0
+nx = 400
+imp0 = 377.0
 
-wavelength = int(nx/10)
+wavelength = int(nx/5)
 factor = 2
 epshost = 1.5
 epsmat = 2
@@ -35,16 +35,17 @@ nhost = np.sqrt(epshost)
 nmat = np.sqrt(epsmat)
 
 scale = nhost/nmat
+#scale = nmat/nhost
 thickness = wavelength/factor
 
 #rescale thickness and nmat
-nmat = ((thickness*nhost)/int(scale*thickness))
-thickness = int(scale*wavelength/factor)
+nmat = (thickness*nhost)/int(thickness*scale)
+thickness = int(thickness*scale)
 
 epsmat = nmat**2
 eps = np.zeros(nx)
 eps[:] = epshost
-eps[int(nx/2):int(nx/2+thickness)] = epsmat
+eps[int(nx/2):int(nx/2)+thickness] = epsmat
         
 #need to show a version of the efield without the material
 #everything that starts with "ref" is used for the reference
@@ -68,12 +69,6 @@ x = np.arange(0,nx-1,1)
 refez = np.zeros(nx)
 refhy = np.zeros(nx)
 
-#emaxleft = np.zeros(nt)
-#emaxright = np.zeros(nt)
-#hmaxleft = np.zeros(nt)
-#hmaxright = np.zeros(nt)
-
-
 # In[136]:
 
 lc = 1/np.sqrt(eps[0])
@@ -84,13 +79,13 @@ rc = 1/np.sqrt(eps[-1])
 ra = (rc-1)/(rc+1)
 rb = 2/(rc + 1)
 
-reflc = 1/np.sqrt(eps[0])
-refla = (lc-1)/(lc+1)
-reflb = 2/(lc + 1)
+reflc = 1/np.sqrt(refeps[0])
+refla = (reflc-1)/(reflc+1)
+reflb = 2/(reflc + 1)
 
-refrc = 1/np.sqrt(eps[-1])
-refra = (rc-1)/(rc+1)
-refrb = 2/(rc + 1)
+refrc = 1/np.sqrt(refeps[-1])
+refra = (refrc-1)/(refrc+1)
+refrb = 2/(refrc + 1)
 
 
 # In[137]:
@@ -134,11 +129,11 @@ for dt in range(0,nt):
     hy[x] = hy[x] + (ez[x+1] - ez[x])/imp0
 
     #abc at left
-    hwnp11 = hy[1]
-    hwnp10 = -hwnm11 + la*(hwnp11 + hwnm10) + lb*(hwn0 + hwn1)
-    hy[0] = hwnp10
-    hwnm11, hwnm10 = hwn1, hwn0
-    hwn1, hwn0  = hwnp11, hwnp10
+#    hwnp11 = hy[1]
+#    hwnp10 = -hwnm11 + la*(hwnp11 + hwnm10) + lb*(hwn0 + hwn1)
+#    hy[0] = hwnp10
+#    hwnm11, hwnm10 = hwn1, hwn0
+#    hwn1, hwn0  = hwnp11, hwnp10
     
     #abc at right
     hwnp1im1 = hy[-2]
@@ -156,7 +151,7 @@ for dt in range(0,nt):
         amp = 1    
     else:
         amp = m.exp(-((dt-srcdel)*(dt-srcdel))/(srcwid*srcwid))
-    ez[srcori] += amp/np.sqrt(epshost)*np.sin(2*np.pi*dt*lc/wavelength)
+    ez[srcori] += amp/np.sqrt(epshost)*np.sin(2*np.pi*dt*reflc/wavelength)
 
     #abc at left
     ewnp11 = ez[1]
@@ -166,11 +161,11 @@ for dt in range(0,nt):
     ewn1, ewn0  = ewnp11, ewnp10
     
     #abc at right
-    ewnp1im1 = ez[-2]
-    ewnp1i = - ewnm1im1 + ra*(ewnp1im1 + ewnm1i) + rb*(ewnp1i + ewnim1)
-    ez[-1] = ewnp1i
-    ewnm1i, ewnm1im1 = ewni, ewnim1
-    ewni, ewnim1  = ewnp1i, ewnp1im1
+#    ewnp1im1 = ez[-2]
+#    ewnp1i = - ewnm1im1 + ra*(ewnp1im1 + ewnm1i) + rb*(ewnp1i + ewnim1)
+#    ez[-1] = ewnp1i
+#    ewnm1i, ewnm1im1 = ewni, ewnim1
+#    ewni, ewnim1  = ewnp1i, ewnp1im1
 
     ######################
     #Reference
@@ -182,11 +177,11 @@ for dt in range(0,nt):
     refhy[x] = refhy[x] + (refez[x+1] - refez[x])/imp0
 
     #abc at left
-    refhwnp11 = refhy[1]
-    refhwnp10 = -refhwnm11 + refla*(refhwnp11 + refhwnm10) + reflb*(refhwn0 + refhwn1)
-    refhy[0] = refhwnp10
-    refhwnm11, refhwnm10 = refhwn1, refhwn0
-    refhwn1, refhwn0  = refhwnp11, refhwnp10
+#    refhwnp11 = refhy[1]
+#    refhwnp10 = -refhwnm11 + refla*(refhwnp11 + refhwnm10) + reflb*(refhwn0 + refhwn1)
+#    refhy[0] = refhwnp10
+#    refhwnm11, refhwnm10 = refhwn1, refhwn0
+#    refhwn1, refhwn0  = refhwnp11, refhwnp10
     
     #abc at right
     refhwnp1im1 = refhy[-2]
@@ -204,7 +199,7 @@ for dt in range(0,nt):
         amp = 1    
     else:
         amp = m.exp(-((dt-srcdel)*(dt-srcdel))/(srcwid*srcwid))
-    refez[srcori] += amp/np.sqrt(epshost)*np.sin(2*np.pi*dt*lc/wavelength)
+    refez[srcori] += amp/np.sqrt(epshost)*np.sin(2*np.pi*dt*reflc/wavelength)
  
     #abc at left
     refewnp11 = refez[1]
@@ -214,14 +209,14 @@ for dt in range(0,nt):
     refewn1, refewn0  = refewnp11, refewnp10
     
     #abc at right
-    refewnp1im1 = refez[-2]
-    refewnp1i = - refewnm1im1 + refra*(refewnp1im1 + refewnm1i) + refrb*(refewnp1i + refewnim1)
-    refez[-1] = refewnp1i
-    refewnm1i, refewnm1im1 = refewni, refewnim1
-    refewni, refewnim1  = refewnp1i, refewnp1im1
+#    refewnp1im1 = refez[-2]
+#    refewnp1i = - refewnm1im1 + refra*(refewnp1im1 + refewnm1i) + refrb*(refewnp1i + refewnim1)
+#    refez[-1] = refewnp1i
+#    refewnm1i, refewnm1im1 = refewni, refewnim1
+#    refewni, refewnim1  = refewnp1i, refewnp1im1
 
     plt.hold(True)
-    if (dt % 1000 == 0 and dt > 1000):
+    if (dt % 1000 == 0):
 #    if (dt == srcdel+srcwid+(0.75*nx)):
         fignum = fignum + 1
         plt.figure(fignum)
@@ -244,6 +239,6 @@ for dt in range(0,nt):
             plt.plot(ez, label="E-field")                
         elif (show_left_only):
             plt.title("Field Difference at t = "+ str(dt))        
-            plt.plot(ez[:int(nx/2)]-refez[:int(nx/2)], label="E-field")        
+            plt.plot(ez[:int(nx/2)]-refez[:int(nx/2)], label="E-field")
 #        plt.plot(hy*imp0, label="H-field")
 
