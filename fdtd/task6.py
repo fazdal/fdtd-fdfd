@@ -56,15 +56,10 @@ eps[int(nx/2+thickness):] = epsright
 refeps= np.zeros(nx)
 refeps[:] = epshost
 
-# In[134]:
-
 srcori = int(nx/10)              #source origin
 srcwid = wavelength*3.0*np.sqrt(max(epshost,epsmat))
 srcdel = 10*srcwid              #source delay
 nt = int(10*nx+srcdel)
-
-
-# In[135]:
 
 ez = np.zeros(nx)
 hy = np.zeros(nx)
@@ -77,9 +72,6 @@ refhy = np.zeros(nx)
 #emaxright = np.zeros(nt)
 #hmaxleft = np.zeros(nt)
 #hmaxright = np.zeros(nt)
-
-
-# In[136]:
 
 lc = 1/np.sqrt(eps[0])
 la = (lc-1)/(lc+1)
@@ -96,9 +88,6 @@ reflb = 2/(lc + 1)
 refrc = 1/np.sqrt(eps[-1])
 refra = (rc-1)/(rc+1)
 refrb = 2/(rc + 1)
-
-
-# In[137]:
 
 hwnp10, ewnp10 = 0,0 # W | ^{n+1} _{0}
 hwnm11, ewnm11 = 0,0 # W | ^{n-1} _{1}
@@ -129,9 +118,8 @@ refhwnm1im1, refewnm1im1 = 0,0 # W | ^{n-1} _{i-1}
 refhwnim1  , refewnim1   = 0,0 # W | ^{n  } _{i-1}
 refhwni    , refewni     = 0,0 # W | ^{n  } _{i  }
 
-
-# In[138]:
 amp = 1.0
+refamp = 1.0
 for dt in range(0,nt):
     ######################
     #Magnetic field
@@ -206,10 +194,10 @@ for dt in range(0,nt):
     refez[x+1] = refez[x+1] + (refhy[x+1]-refhy[x])*imp0/refeps[x+1]
     
     if (dt > srcdel):
-        amp = 1    
+        refamp = 1    
     else:
-        amp = m.exp(-((dt-srcdel)*(dt-srcdel))/(srcwid*srcwid))
-    refez[srcori] += amp/np.sqrt(epshost)*np.sin(2*np.pi*dt*lc/wavelength)
+        refamp = m.exp(-((dt-srcdel)*(dt-srcdel))/(srcwid*srcwid))
+    refez[srcori] += refamp/np.sqrt(epshost)*np.sin(2*np.pi*dt*lc/wavelength)
 
     #abc at left
     refewnp11 = refez[1]
