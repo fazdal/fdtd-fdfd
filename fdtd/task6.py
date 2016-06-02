@@ -24,11 +24,11 @@ show_left_only = 0
 # In[133]:
 
 nx = 400
-imp0 = 337.0
+imp0 = 377.0
 
 wavelength = int(nx/5)
 factor = 4
-epshost = 1.2
+epshost = 1.4
 epsmat = 4
 
 nhost = np.sqrt(epshost)
@@ -226,27 +226,29 @@ for dt in range(0,nt):
 #    refewni, refewnim1  = refewnp1i, refewnp1im1
 
     plt.hold(True)
-    if (dt % 1000 == 0 and dt > 1000):
+    if (dt % 1000 == 0):
 #    if (dt == srcdel+srcwid+(0.75*nx)):
         fignum = fignum + 1
         plt.figure(fignum)
         plt.xlabel("Position")
         plt.ylabel("Amplitude")
-        plt.axvspan(nx/2, thickness+nx/2, facecolor='g', alpha=0.25)
 
         if (show_field_difference):
+            plt.axvspan(nx/2, thickness+nx/2, facecolor='g', alpha=0.25)
             plt.title("Field Difference at t = "+ str(dt))        
             plt.plot(ez-refez, label="E-field")        
         elif (show_efield_and_refefield):
+            plt.axvspan(nx/2, thickness+nx/2, facecolor='g', alpha=0.25)
             plt.title("Field at t = "+ str(dt))        
             plt.plot(ez, label="E-field")                
             plt.plot(refez, label="Ref. E-field")                
             plt.legend()
         elif (show_efield_only):
+            plt.axvspan(nx/2, thickness+nx/2, facecolor='g', alpha=0.25)
             plt.title("Field at t = "+ str(dt))        
             plt.plot(ez, label="E-field")                
         elif (show_left_only):
             plt.title("Field Difference at t = "+ str(dt))        
-            plt.plot(ez[:int(nx/2)]-refez[:int(nx/2)], label="E-field")        
+            plt.plot(ez[:int(nx/2)]-refez[:int(nx/2)], label="E-field")
 #        plt.plot(hy*imp0, label="H-field")
 
