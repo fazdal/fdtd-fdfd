@@ -1,14 +1,3 @@
-
-# coding: utf-8
-
-# Task 4: Fresnel Equations
-# ===
-# 
-# (ABC version)
-
-# In[132]:
-
-#get_ipython().magic('matplotlib inline')
 from matplotlib import pyplot as plt
 
 import numpy as np
@@ -21,7 +10,7 @@ show_field_difference = 1
 show_efield_and_refefield = 0
 show_efield_only = 0
 show_left_only = 0
-# In[133]:
+
 
 nx = 400
 imp0 = 377.0
