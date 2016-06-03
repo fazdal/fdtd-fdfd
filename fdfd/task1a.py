@@ -1,18 +1,24 @@
-#%matplotlib inline
+
+# coding: utf-8
+
+# In[1]:
+
+get_ipython().magic('matplotlib inline')
 from matplotlib import pyplot as plt
     
 import numpy as np
 import scipy.sparse.linalg as ssl
     
 #    n = 20# number of steps
-nlist = [10,20,30,40,50,100]
+nlist = [6, 10,30,50,80,90,100]
     
 for n in nlist:
     c = 1 #spd of light
     size = 1   # domain size
     
     dx = size/n  #step size
-    getev = 6 # eigenvalues desired
+    getev = 4 # eigenvalues desired
+    x = np.arange(0,size,dx)
     
     iden = np.ones((n,n)) #identity matrix
     F = (1/dx)*(np.triu(iden)-2*np.diag(np.diag(iden))-np.triu(iden,2))
@@ -42,7 +48,8 @@ for n in nlist:
     for i in range(1, getev):
         fignum = fignum + 1
         plt.figure(fignum)
-        plt.plot(V[:,i])
+        plt.plot(x, np.abs(V[:,i]), label="n = " + str(n))
+        plt.legend()
         
         
     plt.figure(fignum+1)
@@ -51,3 +58,9 @@ for n in nlist:
     plt.title("$\lambda$ vs eigenvalue")
     plt.plot(lam, label="n = " + str(n))
     plt.legend()
+
+
+# In[ ]:
+
+
+
